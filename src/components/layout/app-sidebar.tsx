@@ -19,6 +19,7 @@ import { adminRoutes } from "@/routes/adminRoutes"
 import { studentRoutes } from "@/routes/studentRoutes"
 import { tutorRoutes } from "@/routes/tutorRoutes"
 import { Route } from "@/types"
+import { Roles } from "@/constant/role"
 
 // This is sample data.
 // const data = {
@@ -161,13 +162,13 @@ export function AppSidebar({ user, ...props }: { user: { role: string } & React.
   let routes: Route[] = [];
 
   switch (user.role) {
-    case "ADMIN":
+    case Roles.ADMIN:
       routes = adminRoutes;
       break;
-    case "STUDENT":
+    case Roles.STUDENT:
       routes = studentRoutes;
       break;
-    case "TUTOR":
+    case Roles.TUTOR:
       routes = tutorRoutes;
       break;
   

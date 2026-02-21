@@ -13,8 +13,10 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import { Roles } from "@/constant/role";
+import { userServices } from "@/services/user.services";
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   student,
   admin,
   tutor
@@ -27,10 +29,8 @@ export default function DashboardLayout({
   }
 ) {
 
-  const userInfo = {
-    role: "ADMIN",
-  }
-  
+  const { data } = await userServices.getSession();
+  const userInfo = data?.user || { role: null };
   return (
     <SidebarProvider>
       <AppSidebar user={userInfo}/>
@@ -54,7 +54,7 @@ export default function DashboardLayout({
           </Breadcrumb>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
-          {userInfo.role === "ADMIN" ? admin : userInfo.role === "STUDENT" ? student : tutor}
+          {userInfo.role === Roles.ADMIN ? admin : userInfo.role === Roles.STUDENT ? student : tutor}
         </div>
         {/* <div className="flex flex-1 flex-col gap-4 p-4">
           <div className="grid auto-rows-min gap-4 md:grid-cols-3">
