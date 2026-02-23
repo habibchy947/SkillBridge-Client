@@ -9,6 +9,8 @@ import {
 import { TutorsPublic } from "@/types";
 import { Rating } from "@/components/rating";
 import { Badge } from "@/components/ui/badge";
+import { ArrowUpRightIcon } from "lucide-react";
+import Link from "next/link";
 
 
 interface ProductCard1Props {
@@ -38,12 +40,19 @@ const TutorsPublicCard = ({ tutor }: { tutor: TutorsPublic }) => {
         <div className="mt-auto">
           <Rating rate={tutor.rating} showScore />
         </div>
-        <div className="flex gap-2">
-          {
-            tutor.categories.length && (
-              tutor.categories.map((category) => <Badge key={category.id} className="bg-green-50 text-green-700 dark:bg-green-950 dark: text-green-300">{category.name}</Badge>)
-            )
-          }
+        <div className="flex justify-between">
+          <div className="flex gap-2">
+            {
+              tutor.categories.length && (
+                tutor.categories.map((category) => <Badge key={category.id} className="bg-green-50 text-green-700 dark:bg-green-950 dark: text-green-300">{category.name}</Badge>)
+              )
+            }
+          </div>
+          <Badge asChild className="font-bold">
+            <Link href={`tutors/${tutor.id}`}>
+              Details <ArrowUpRightIcon data-icon="inline-end" />
+            </Link>
+          </Badge>
         </div>
       </CardContent>
     </Card>
