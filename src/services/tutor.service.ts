@@ -7,11 +7,13 @@ interface TutorServiceOptions {
     revalidate?: number;
 }
 
-interface GetTutorParams {
+interface GetTutorParams { 
     category?: string;
     search?: string;
     page?: string;
-    limit?: string
+    limit?: string;
+    sortBy?: string;
+    sortOrder?: string;
 }
 
 export const tutorServices = {
@@ -44,7 +46,6 @@ export const tutorServices = {
             return { data: null, error: { message: error instanceof Error ? error.message : "Failed to fetch Tutors" } };
         };
     },
-
     getTutorById: async (id: string) => {
         try {
             const res = await fetch(`${API_URL}/tutors/${id}`);

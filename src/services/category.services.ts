@@ -5,7 +5,6 @@ import { cookies } from "next/headers";
 const API_URL = env.API_URL;
 
 
-
 export const categoryServices = {
     getCategoriesByAdmin: async () => {
         try {
