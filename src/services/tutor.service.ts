@@ -10,6 +10,8 @@ interface TutorServiceOptions {
 interface GetTutorParams {
     category?: string;
     search?: string;
+    page?: string;
+    limit?: string
 }
 
 export const tutorServices = {

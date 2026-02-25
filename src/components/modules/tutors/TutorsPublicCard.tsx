@@ -20,7 +20,7 @@ interface ProductCard1Props {
 const TutorsPublicCard = ({ tutor }: { tutor: TutorsPublic }) => {
 
   return (
-    <Card className="h-full overflow-hidden p-0">
+    <Card className="h-full overflow-hidden p-0 rounded-md">
       <CardHeader className="relative block p-0">
         <AspectRatio ratio={1.268115942} className="overflow-hidden">
           <img

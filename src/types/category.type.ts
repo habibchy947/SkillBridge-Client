@@ -4,3 +4,7 @@ export interface AdminCategory {
     createdAt: string;
     updatedAt: string;
 }
+
+export interface CategoryData {
+    name: string;
+}
