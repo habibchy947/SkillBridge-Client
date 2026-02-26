@@ -3,8 +3,26 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 export default function SkeletonCard() {
   return (
-    <div className="container mx-auto">
-      <Card className="w-full max-w-xs">
+    <div className="container mx-auto grid grid-cols-1 md:grid-cols-3">
+      <Card className="w-full max-w-xs h-48">
+        <CardHeader>
+          <Skeleton className="h-4 w-2/3" />
+          <Skeleton className="h-4 w-1/2" />
+        </CardHeader>
+        <CardContent>
+          <Skeleton className="aspect-video w-full" />
+        </CardContent>
+      </Card>
+      <Card className="w-full max-w-xs h-48">
+        <CardHeader>
+          <Skeleton className="h-4 w-2/3" />
+          <Skeleton className="h-4 w-1/2" />
+        </CardHeader>
+        <CardContent>
+          <Skeleton className="aspect-video w-full" />
+        </CardContent>
+      </Card>
+      <Card className="w-full max-w-xs h-48">
         <CardHeader>
           <Skeleton className="h-4 w-2/3" />
           <Skeleton className="h-4 w-1/2" />

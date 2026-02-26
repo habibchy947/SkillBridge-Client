@@ -22,6 +22,12 @@ import {
 } from "@/components/ui/sheet";
 import Link from "next/link";
 import { ModeToggle } from "./ModeToggle";
+import ProfileAvatar from "./ProfileAvatar";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import { authClient } from "@/lib/auth-client";
+import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
+import { Skeleton } from "../ui/skeleton";
 
 interface MenuItem {
   title: string;
@@ -50,7 +56,32 @@ interface Navbar1Props {
       title: string;
       url: string;
     };
+    logout: {
+      title: string;
+    };
   };
+  // sessionData: {
+  //   session: {
+  //     id: string;
+  //     token: string;
+  //     userId: string;
+  //     ipAddress: string;
+  //     userAgent: string;
+  //     createdAt: string;
+  //     updatedAt: string;
+  //     expiresAt: string;
+  //   };
+  //   user: {
+  //     id: string;
+  //     name: string;
+  //     email: string;
+  //     emailVerified: boolean;
+  //     image: string;
+  //     role: "STUDENT" | "TUTOR";
+  //     createdAt: string;
+  //     updatedAt: string;
+  //   };
+  // }
 }
 
 const Navbar = ({
@@ -74,9 +105,28 @@ const Navbar = ({
   auth = {
     login: { title: "Login", url: "/login" },
     signup: { title: "Register", url: "/register" },
+    logout: { title: "LogOut" },
   },
   className,
+  // sessionData
 }: Navbar1Props) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const { data: sessionData, isPending } = authClient.useSession()
+  console.log(sessionData, isPending)
+  const handleLogout = async () => {
+    try {
+      setIsLoggingOut(true);
+      await authClient.signOut();
+      router.push("/");
+      router.refresh();
+    } catch (error) {
+      console.error("Logout failed", error);
+    } finally {
+      setIsLoggingOut(false);
+    }
+  };
   return (
     <section className={cn("py-4", className)}>
       <div className="container mx-auto">
@@ -104,12 +154,45 @@ const Navbar = ({
           </div>
           <div className="flex gap-2">
             <ModeToggle />
-            <Button asChild variant="outline" size="sm">
-              <Link href={auth.login.url}>{auth.login.title}</Link>
-            </Button>
-            <Button asChild size="sm">
-              <Link href={auth.signup.url}>{auth.signup.title}</Link>
-            </Button>
+            {
+              isPending ?
+                <div className="flex w-fit items-center gap-4">
+                  <Skeleton className="size-9 shrink-0 rounded-full" />
+                  <div className="grid gap-2">
+                    <Skeleton className="h-4 w-[100px]" />
+                  </div>
+                </div>
+                :
+                sessionData ?
+                  <>
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <ProfileAvatar imgUrl={sessionData.user.image as string} />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>{sessionData.user.name}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                    <Button
+                      onClick={handleLogout}
+                      disabled={isLoggingOut}
+                      className="hover:cursor-pointer"
+                    >
+                      {isLoggingOut ? "Logging out..." : auth.logout.title}
+                    </Button>
+                  </>
+                  :
+                  <>
+
+                    <Button asChild variant="outline">
+                      <Link href={auth.login.url}>{auth.login.title}</Link>
+                    </Button>
+                    <Button asChild>
+                      <Link href={auth.signup.url}>{auth.signup.title}</Link>
+                    </Button>
+                  </>
+
+            }
           </div>
         </nav>
 
@@ -125,6 +208,17 @@ const Navbar = ({
               />
             </Link>
             <div className="flex justify-between gap-2">
+              {
+                sessionData &&
+                <Tooltip>
+                  <TooltipTrigger>
+                    <ProfileAvatar imgUrl={sessionData.user.image as string} />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{sessionData.user.name}</p>
+                  </TooltipContent>
+                </Tooltip>
+              }
               <ModeToggle />
               <Sheet>
                 <SheetTrigger asChild>
@@ -153,12 +247,25 @@ const Navbar = ({
                       {menu.map((item) => renderMobileMenuItem(item))}
                     </Accordion>
                     <div className="flex flex-col gap-3">
-                      <Button asChild variant="outline">
-                        <Link href={auth.login.url}>{auth.login.title}</Link>
-                      </Button>
-                      <Button asChild>
-                        <Link href={auth.signup.url}>{auth.signup.title}</Link>
-                      </Button>
+                      {
+                        sessionData ?
+                          <Button
+                            onClick={handleLogout}
+                            disabled={isLoggingOut}
+                          >
+                            {isLoggingOut ? "Logging out..." : auth.logout.title}
+                          </Button>
+                          :
+                          <>
+                            <Button asChild variant="outline">
+                              <Link href={auth.login.url}>{auth.login.title}</Link>
+                            </Button>
+                            <Button asChild>
+                              <Link href={auth.signup.url}>{auth.signup.title}</Link>
+                            </Button>
+                          </>
+
+                      }
                     </div>
                   </div>
                 </SheetContent>

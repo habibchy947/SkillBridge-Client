@@ -43,5 +43,43 @@ export const categoryServices = {
         } catch (error) {
             return { data: null, error: { message: error instanceof Error ? error.message : "Failed to create category" } };
         }
+    },
+    updateCategory: async (categoryData: CategoryData, id: string) => {
+        try {
+            const cookieStore = await cookies();
+            const res = await fetch(`${API_URL}/categories/${id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    Cookie: cookieStore.toString(),
+                },
+                body: JSON.stringify(categoryData),
+            });
+            const data = await res.json();
+            if (data.error) {
+                return { data: null, error: { message: data.error.message || "Category Updating Failed!" } }
+            }
+            return { data: data, error: null };
+        } catch (error) {
+            return { data: null, error: { message: error instanceof Error ? error.message : "Failed to Update category" } };
+        }
+    },
+    deleteCategory: async (id: string) => {
+        try {
+            const cookieStore = await cookies();
+            const res = await fetch(`${API_URL}/categories/${id}`, {
+                method: "DELETE",
+                headers: {
+                    Cookie: cookieStore.toString(),
+                },
+            });
+            const data = await res.json();
+            if (data.error) {
+                return { data: null, error: { message: data.error.message || "Failed to delete this category!" } }
+            }
+            return { data: data, error: null };
+        } catch (error) {
+            return { data: null, error: { message: error instanceof Error ? error.message : "Failed to delete this category" } };
+        }
     }
 }

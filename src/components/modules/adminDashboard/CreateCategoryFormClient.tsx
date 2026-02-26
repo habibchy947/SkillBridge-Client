@@ -17,7 +17,7 @@ import { toast } from "sonner";
 import * as z from "zod";
 
 const categorySchema = z.object({
-  name: z.string().trim().min(2, "Category Name must be at least 3 characters!"),
+  name: z.string().trim().min(2, "Category Name must be at least 2 characters!"),
 })
 
 export function CreateCategoryFormClient({ ...props }: React.ComponentProps<typeof Card>) {

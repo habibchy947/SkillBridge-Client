@@ -37,6 +37,7 @@ export const tutorServices = {
                     revalidate: options.revalidate
                 }
             }
+            config.next = { ...config.next, tags: ["allTutors"] };
             const res = await fetch(url.toString(), config);
             const data = await res.json();
             if (data.success) {

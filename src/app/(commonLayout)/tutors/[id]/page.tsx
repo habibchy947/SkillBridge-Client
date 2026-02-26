@@ -3,7 +3,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { tutorServices } from "@/services/tutor.service";
+import { TutorsPublic } from "@/types";
 import { Calendar, DollarSign } from "lucide-react";
+
+export async function generateStaticParams() {
+  const  data = await tutorServices.getAllTutors();
+  return data?.data?.data?.data?.map((tutor: TutorsPublic) => ({ id: tutor.id })).splice(0, 3);
+}
 
 export default async function TutorDetailsPage({ params, }: { params: Promise<{ id: string }>; }) {
   const { id } = await params;

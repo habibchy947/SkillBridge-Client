@@ -24,11 +24,6 @@ const TutorsPublicCard = ({ tutor }: { tutor: TutorsPublic }) => {
     <Card className="h-full overflow-hidden p-0 rounded-md">
       <CardHeader className="relative block p-0">
         <AspectRatio ratio={1.268115942} className="overflow-hidden">
-          {/* <img
-            src={tutor.user.image}
-            alt={tutor.bio}
-            className="block size-full object-cover object-center"
-          /> */}
            <Image
             src={tutor.user.image}
             fill
