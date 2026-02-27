@@ -2,7 +2,7 @@
 import { deleteCategory, updateCategory } from "@/actions/category.actions"
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogMedia, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import {
@@ -98,6 +98,7 @@ export function CategoryTable({ categorys }: { categorys: AdminCategory[] }) {
             <TableCell className="">{category.createdAt}</TableCell>
             <TableCell className="text-right">
               <div className="flex justify-end gap-2">
+
                 {/* delete category */}
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
@@ -125,6 +126,7 @@ export function CategoryTable({ categorys }: { categorys: AdminCategory[] }) {
                   setSelectedCategory(category); form.reset({ name: category.name }); setOpen(true);
                 }}><Edit className="w-4 h-4" />
                 </Button>
+
               </div>
             </TableCell>
           </TableRow>

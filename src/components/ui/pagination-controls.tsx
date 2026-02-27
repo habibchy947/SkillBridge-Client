@@ -37,7 +37,11 @@ export default function PaginationControls({ meta }: PaginationControlProps) {
                 Showing {start} to {end} of {total} results.
                 <Field orientation="horizontal" className="w-fit">
                     <FieldLabel htmlFor="select-rows-per-page">Rows per page</FieldLabel>
-                    <Select disabled={pageSize >= total} defaultValue="5" onValueChange={(e) => rowsPerPage(e)}>
+                    <Select
+                        value={String(pageSize)}
+                        disabled={total <= 5}
+                        onValueChange={(value) => rowsPerPage(value)}
+                    >
                         <SelectTrigger className="w-20" id="select-rows-per-page">
                             <SelectValue />
                         </SelectTrigger>

@@ -7,8 +7,8 @@ import { TutorsPublic } from "@/types";
 export default async function Tutors({ searchParams }: {
   searchParams: Promise<{
     category?: string;
-    search?: string; 
-    page?: string; 
+    search?: string;
+    page?: string;
     limit?: string;
   }>
 }) {
@@ -46,7 +46,7 @@ export default async function Tutors({ searchParams }: {
               tutors.map((tutor: TutorsPublic) => <TutorsPublicCard key={tutor.id} tutor={tutor} />)
             }
           </div>
-         : <div className="flex justify-center min-h-max">No Tutors Found</div>
+          : <div className="flex justify-center min-h-max">No Tutors Found</div>
       }
       <PaginationControls meta={pagination} />
     </div>
