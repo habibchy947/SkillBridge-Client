@@ -31,6 +31,7 @@ export default async function UsersPage({ searchParams }: {
         })
     // console.log(response)
     const users = response?.data?.data?.data || []
+    console.log(users)
     const tutor = response?.data?.data.tutor || 0;
     const student = response?.data?.data.student || 0;
     const pagination = response?.data?.data?.pagination || {

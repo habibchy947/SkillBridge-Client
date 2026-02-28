@@ -28,6 +28,7 @@ export default async function Tutors({ searchParams }: {
   }
   );
   const tutors = response?.data?.data?.data || []
+  console.log(tutors)
   const pagination = response?.data?.data?.pagination || {
     limit: 10,
     page: 1,

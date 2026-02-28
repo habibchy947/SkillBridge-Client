@@ -45,8 +45,8 @@ const TutorsPublicCard = ({ tutor }: { tutor: TutorsPublic }) => {
         <div className="flex justify-between">
           <div className="flex gap-2">
             {
-              tutor.categories.length && (
-                tutor.categories.map((category) => <Badge key={category.id} className="bg-green-50 text-green-700 dark:bg-green-950 dark: text-green-300">{category.name}</Badge>)
+              tutor.category && (
+                <Badge className="bg-green-50 text-green-700 dark:bg-green-950 dark: text-green-300">{tutor.category.name}</Badge>
               )
             }
           </div>

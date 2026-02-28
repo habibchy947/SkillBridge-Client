@@ -10,7 +10,7 @@ export const adminRoutes : Route[] = [
         },
         {
           title: "Bookings",
-          url: "/bookings",
+          url: "/admin/bookings",
         },  
         {
           title: "Users",

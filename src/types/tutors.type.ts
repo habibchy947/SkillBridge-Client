@@ -5,12 +5,12 @@ export interface TutorsPublic {
   hourlyRate: number;
   rating: number;
   totalReviews: number;
-  categories: {
+  category: {
     id: string | number;
     name: string;
     createdAt: string;
     updatedAt: string;
-  }[];
+  };
   createdAt: string;
   updatedAt: string;
   reviews: {

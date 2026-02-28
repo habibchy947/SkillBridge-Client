@@ -54,11 +54,9 @@ export default async function TutorDetailsPage({ params, }: { params: Promise<{ 
 
             {/* Categories */}
             <div className="flex flex-wrap gap-2">
-              {tutor.categories?.map((cat: any) => (
-                <Badge key={cat.id} variant="secondary">
-                  {cat.name}
+                <Badge variant="secondary">
+                  {tutor.category.name}
                 </Badge>
-              ))}
             </div>
 
             {/* Pricing + Availability */}
