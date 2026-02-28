@@ -6,7 +6,7 @@ export const adminRoutes : Route[] = [
       items: [
         {
           title: "Analytics",
-          url: "/statistics",
+          url: "/admin/analytics",
         },
         {
           title: "Bookings",

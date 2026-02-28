@@ -45,7 +45,7 @@ export default function BookingsFilter({ categorys }: { categorys: AdminCategory
                 <CardTitle className="text-lg">Filters</CardTitle>
             </CardHeader>
             <CardContent className="grid  md:grid-cols-2 gap-4">
-                {/* Category */}
+
                 <Select
                     value={category}
                     onValueChange={(value) =>
@@ -62,7 +62,6 @@ export default function BookingsFilter({ categorys }: { categorys: AdminCategory
                     </SelectContent>
                 </Select>
 
-                {/* STATUS */}
                 <Select
                     value={status}
                     onValueChange={(value) =>
@@ -81,7 +80,6 @@ export default function BookingsFilter({ categorys }: { categorys: AdminCategory
                     </SelectContent>
                 </Select>
 
-                {/* CLEAR BUTTON */}
                 {hasActiveFilters && (
                     <Button
                         variant="ghost"

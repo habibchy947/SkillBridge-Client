@@ -40,7 +40,6 @@ export default function UsersFilters() {
     return (
         <div className="flex flex-wrap items-center gap-4 rounded-md border  p-4 shadow-sm">
 
-            {/* ROLE */}
             <Select
                 value={role}
                 onValueChange={(value) =>
@@ -58,7 +57,6 @@ export default function UsersFilters() {
                 </SelectContent>
             </Select>
 
-            {/* STATUS */}
             <Select
                 value={status}
                 onValueChange={(value) =>
@@ -75,8 +73,6 @@ export default function UsersFilters() {
                     <SelectItem value="BANNED">BANNED</SelectItem>
                 </SelectContent>
             </Select>
-
-            {/* CLEAR BUTTON */}
             {hasActiveFilters && (
                 <Button
                     variant="ghost"

@@ -1,5 +1,4 @@
 import DashboardHeader from "@/components/layout/DashboardHeader";
-import AllBookings from "@/components/modules/adminDashboard/AllBookings";
 import BookingsFilter from "@/components/modules/adminDashboard/BookingsFilter";
 import BookingsTable from "@/components/modules/adminDashboard/BookingsTable";
 import PaginationControls from "@/components/ui/pagination-controls";
