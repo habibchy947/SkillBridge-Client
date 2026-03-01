@@ -6,7 +6,11 @@ export const tutorRoutes: Route[] = [
       items: [
         {
           title: "Availability",
-          url: "/availability",
+          url: "/tutor/availability",
+        },
+        {
+          title: "Profile",
+          url: "/tutor/profile",
         }
       ],
     },

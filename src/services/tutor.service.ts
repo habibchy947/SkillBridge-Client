@@ -8,6 +8,9 @@ interface TutorServiceOptions {
 }
 
 interface GetTutorParams { 
+    minRate?: string,
+    maxRate?: string,
+    minRating?: string,
     category?: string;
     search?: string;
     page?: string;
@@ -58,4 +61,5 @@ export const tutorServices = {
             return { data: null, error: { message: error instanceof Error ? error.message : "Failed to fetch Tutor" } };
         };
     },
+    createTutorProfile: async ()
 };
