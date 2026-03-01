@@ -6,13 +6,13 @@ const API_URL = env.API_URL;
 
 
 export const categoryServices = {
-    getCategoriesByAdmin: async () => {
+    getCategories: async () => {
         try {
-            const cookieStore = await cookies();
-            const res = await fetch(`${API_URL}/categories/admin`, {
-                headers: {
-                    Cookie: cookieStore.toString()
-                },
+            // const cookieStore = await cookies();
+            const res = await fetch(`${API_URL}/categories`, {
+                // headers: {
+                //     Cookie: cookieStore.toString()
+                // },
                 cache: "no-store",
                 next: { tags: ["categories"] }
             });

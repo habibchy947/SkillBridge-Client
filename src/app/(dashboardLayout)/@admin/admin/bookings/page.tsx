@@ -26,7 +26,7 @@ export default async function BookingsPage({ searchParams }: {
         totalPages: 1
     }
     console.log(bookings, pagination)
-    const categoryData = await categoryServices.getCategoriesByAdmin();
+    const categoryData = await categoryServices.getCategories();
     return (
         <div className="space-y-6">
             <DashboardHeader title="All Bookings" description="Manage and monitor all tutoring session bookings" />

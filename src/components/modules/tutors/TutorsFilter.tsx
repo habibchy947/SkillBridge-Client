@@ -13,9 +13,9 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { TutorsPublic } from "@/types";
+import { AdminCategory, TutorsPublic } from "@/types";
 
-export default function TutorsFilter({ tutorsData }: { tutorsData: TutorsPublic }) {
+export default function TutorsFilter({ categories }: { categories: AdminCategory[] }) {
     const router = useRouter();
     const searchParams = useSearchParams();
 
@@ -81,9 +81,10 @@ export default function TutorsFilter({ tutorsData }: { tutorsData: TutorsPublic 
                         </SelectTrigger>
                         <SelectContent>
                             <SelectItem value="ALL">All</SelectItem>
-                            <SelectItem value="Math">Math</SelectItem>
-                            <SelectItem value="Physics">Physics</SelectItem>
-                            <SelectItem value="Programming">Programming</SelectItem>
+                            { categories?.length > 0 ? categories.map((cate) => (
+                                <SelectItem key={cate.id} value={cate.name}>{cate.name}</SelectItem>
+                            ) ): "No Category"
+                         }
                         </SelectContent>
                     </Select>
                 </div>

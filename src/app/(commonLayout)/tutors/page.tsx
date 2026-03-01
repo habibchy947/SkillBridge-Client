@@ -1,6 +1,7 @@
 import TutorsFilter from "@/components/modules/tutors/TutorsFilter";
 import { TutorsPublicCard } from "@/components/modules/tutors/TutorsPublicCard";
 import PaginationControls from "@/components/ui/pagination-controls";
+import { categoryServices } from "@/services/category.services";
 import { tutorServices } from "@/services/tutor.service"
 import { TutorsPublic } from "@/types";
 
@@ -42,10 +43,12 @@ export default async function Tutors({ searchParams }: {
   // console.log(tutors)
   // console.log(pagination)
   // console.log(response?.data?.data?.data)
+
+  const data = await categoryServices.getCategories();
   return (
     <div className="max-w-7xl px-5 lg:px-0 mx-auto mt-5 ">
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        <TutorsFilter tutorsData={tutors} />
+        <TutorsFilter categories={data?.data?.data} />
         <div className="md:col-span-2 lg:col-span-3 space-y-6">
           {
             tutors.length ?

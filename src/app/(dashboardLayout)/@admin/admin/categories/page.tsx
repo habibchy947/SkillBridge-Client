@@ -4,7 +4,7 @@ import { CreateCategoryFormClient } from "@/components/modules/adminDashboard/Cr
 import { categoryServices } from "@/services/category.services";
 
 export default async function CategoryPage() {
-    const data = await categoryServices.getCategoriesByAdmin();
+    const data = await categoryServices.getCategories();
     console.log("Categories data:", data);
     return (
         <div>

@@ -26,6 +26,19 @@ export interface TutorsPublic {
   user: {
     id: string | number;
     name: string;
+    email: string;
     image: string;
   };
+}
+
+export interface TutorInput {
+  bio: string;
+  hourlyRate: number;
+  categoryId: string;
+}
+
+export interface TutorUpdateInput {
+  bio?: string;
+  hourlyRate?: number;
+  categoryId?: string;
 }
