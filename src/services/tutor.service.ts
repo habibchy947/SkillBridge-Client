@@ -1,5 +1,6 @@
 import { env } from "@/env";
 import { TutorInput, TutorUpdateInput } from "@/types";
+import { CreateTutorAvailability, UpdateTutorAvailability } from "@/types/tutors.type";
 import { cookies } from "next/headers";
 
 const API_URL = env.API_URL;
@@ -149,5 +150,91 @@ export const tutorServices = {
         } catch (error) {
             return { data: null, error: { message: error instanceof Error ? error.message : "Failed to Update Profile" } };
         }
-    }
+    },
+    createTutorAvailability: async (availabilitySlot: CreateTutorAvailability) => {
+        try {
+            const cookieStore = await cookies();
+            const res = await fetch(`${API_URL}/tutors/availability`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Cookie: cookieStore.toString(),
+                },
+                body: JSON.stringify(availabilitySlot),
+            });
+            const data = await res.json();
+            if (!res.ok) {
+                return {
+                    data: null,
+                    error: {
+                        message:
+                            data.message || "Failed to Create Availability Slot",
+                    },
+                };
+            }
+            return { data: data, error: null };
+        } catch (error) {
+            return { data: null, error: { message: error instanceof Error ? error.message : "Failed to Create Availability Slot" } };
+        }
+    },
+    getTutorOwnAvailabilitySlot: async (options: ServiceOptions) => {
+        try {
+            const cookieStore = await cookies();
+            const url = new URL(`${API_URL}/tutors/own/availability/slots`);
+
+            const config: RequestInit = {};
+
+            if (options?.cache) {
+                config.cache = options.cache
+            };
+            if (options?.revalidate) {
+                config.next = {
+                    revalidate: options.revalidate
+                }
+            }
+            config.next = { ...config.next, tags: ["ownSlot"] };
+            config.headers = { Cookie: cookieStore.toString() };
+
+            const res = await fetch(url.toString(), config);
+            const data = await res.json();
+            if (!res.ok) {
+                return {
+                    data: null,
+                    error: {
+                        message:
+                            data.message || "Failed to Fetched Availability Slot",
+                    },
+                };
+            }
+            return { data: data, error: null };
+        } catch (error) {
+            return { data: null, error: { message: error instanceof Error ? error.message : "Failed to fetch Availability Slot" } };
+        };
+    },
+    updateAvailabilitySlot: async (availability: UpdateTutorAvailability, id: string) => {
+        try {
+            const cookieStore = await cookies();
+            const res = await fetch(`${API_URL}/tutors/availability/${id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Cookie: cookieStore.toString(),
+                },
+                body: JSON.stringify(availability),
+            });
+            const data = await res.json();
+            if (!res.ok) {
+                return {
+                    data: null,
+                    error: {
+                        message:
+                            data.message || "Failed to Update Availability",
+                    },
+                };
+            }
+            return { data: data, error: null };
+        } catch (error) {
+            return { data: null, error: { message: error instanceof Error ? error.message : "Failed to Update Availability" } };
+        }
+    },
 };

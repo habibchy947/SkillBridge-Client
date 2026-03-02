@@ -42,3 +42,23 @@ export interface TutorUpdateInput {
   hourlyRate?: number;
   categoryId?: string;
 }
+
+export interface CreateTutorAvailability {
+  day: string;
+  startTime: string;
+  endTime: string;
+}
+
+export interface UpdateTutorAvailability {
+  day?: string;
+  startTime: string;
+  endTime: string;
+}
+
+export interface TutorAvailability {
+  id: string,
+  tutorId: string,
+  day: string,
+  startTime: string,
+  endTime: string,
+}
